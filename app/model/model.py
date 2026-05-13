@@ -8,6 +8,8 @@ from app.model.utils.cleaning import clean_csv
 from app.config import CSV_FILE_PATH
 from app.model.utils.hyper_parameter import tune_hyperparameters
 from app.model.utils.report import generate_report
+import joblib
+from app.config import MODEL_PATH
 
 def model_training():
 
@@ -53,6 +55,8 @@ def model_training():
 
     #training the model with the best hyperparameters
     model.fit(X_train, y_train)
+
+    joblib.dump(model, MODEL_PATH)
 
     report = generate_report(model, X_test, y_test)
 

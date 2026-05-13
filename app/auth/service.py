@@ -45,6 +45,7 @@ def login(request,db):
     
     #Create JWT token
     token = create_access_token({
+        "id": user.id,
         "sub": user.email,
         "role": user.role
     })
