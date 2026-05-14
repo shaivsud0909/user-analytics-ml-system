@@ -26,6 +26,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 #.csv file path
 CSV_FILE_PATH = os.getenv("CSV_FILE_PATH", str(BASE_DIR / "data/WA_Fn-UseC_-Telco-Customer-Churn.csv"))
+RETRAINING_DATA_PATH = os.getenv("RETRAINING_DATA_PATH", str(BASE_DIR / "data/retraining_data.csv"))
 
 # Model path
 MODEL_PATH = str(BASE_DIR / "app/model/churn_model.pkl")

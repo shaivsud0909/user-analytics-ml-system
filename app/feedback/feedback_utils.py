@@ -54,3 +54,18 @@ def create_feedback(
     )
 
     return feedback
+
+
+def get_positive_feedback_prediction_ids(
+    db: Session
+):
+    predictions = db.query(Prediction.id).join(
+        Feedback
+    ).filter(
+        Feedback.is_correct == True,
+        Feedback.rating > 3
+    ).all()
+
+    return [
+        prediction.id for prediction in predictions
+    ]
