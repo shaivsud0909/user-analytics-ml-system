@@ -18,6 +18,8 @@ def add_data_from_positive_feedback(
     predictions=db.query(Prediction).filter(
         Prediction.id.in_(prediction_ids)
     ).all()
+    
+    print(f"Predictions: {predictions}")
 
     # PREPARE DATA
     training_data = []
@@ -45,9 +47,11 @@ def add_data_from_positive_feedback(
             "PaymentMethod": prediction.PaymentMethod,
             "MonthlyCharges": prediction.MonthlyCharges,
             "TotalCharges": 0,
-
+            
             "Churn": "Yes" if prediction.prediction == 1 else "No"
         })
+
+    print(training_data)
 
     df= pd.DataFrame(training_data) 
 

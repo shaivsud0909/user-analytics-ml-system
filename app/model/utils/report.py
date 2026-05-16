@@ -22,13 +22,6 @@ def generate_report(model, X_test, y_test):
     # ROC-AUC
     roc = roc_auc_score(y_test, y_prob)
 
-    print("\n📊 Classification Report:\n")
-    print(report_df)
-
-    print("\n🧩 Confusion Matrix:\n")
-    print(cm_df)
-
-    print("\n🔥 ROC-AUC Score:", round(roc, 4))
 
     return {
         "classification_report": report_df,
