@@ -1,9 +1,11 @@
+from datetime import datetime
 from typing import Text
 
 from sqlalchemy import (
     TIMESTAMP,
     Boolean,
     Column,
+    DateTime,
     Float,
     Integer,
     String,
@@ -136,6 +138,14 @@ class Prediction(Base):
         cascade="all, delete"
     )
 
+    # ONE PREDICTION -> ONE RETRAINING LOG
+    retraining_log = relationship(
+        "RetrainingLog",
+        back_populates="prediction",
+        uselist=False,
+        cascade="all, delete"
+    )
+
 
 
 
@@ -178,6 +188,41 @@ class Feedback(Base):
         back_populates="feedback"
     )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class RetrainingLog(Base):
+
+    __tablename__ = "retraining_logs"
+
+    id = Column(Integer, primary_key=True)
+
+    prediction_id = Column(
+        Integer,
+        ForeignKey("predictions.id"),
+        unique=True,
+        nullable=False
+    )
+
+    retrained_at = Column(DateTime, default=datetime.utcnow)
+
+    prediction = relationship(
+        "Prediction",
+        back_populates="retraining_log"
+    )
 
 
 
